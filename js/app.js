@@ -37303,16 +37303,21 @@ module.exports = Loading;
 
 },{"react":269}],298:[function(require,module,exports){
 var React = require('react');
-var ReactBootstrap  = require('react-bootstrap');
+var ReactBootstrap = require('react-bootstrap');
+
+var Navbar = ReactBootstrap.Navbar;
+var Nav = ReactBootstrap.Nav;
+var NavItem = ReactBootstrap.NavItem;
+var CollapsibleNav = ReactBootstrap.CollapsibleNav;
 
 var Navigation = React.createClass({displayName: "Navigation",
   render: function () {
     return (
 
-      React.createElement(ReactBootstrap.Navbar, {brand: "Npm Check", inverse: true, toggleNavKey: 0}, 
-        React.createElement(ReactBootstrap.CollapsableNav, {eventKey: 0}, " ", /* This is the eventKey referenced */
-          React.createElement(ReactBootstrap.Nav, {navbar: true, right: true}, 
-            React.createElement(ReactBootstrap.NavItem, {eventKey: 1, href: "https://github.com/ekonstantinidis/npm-check"}, "Fork me on ", React.createElement("i", {className: "fa fa-github"}))
+      React.createElement(Navbar, {brand: "Npm Check", inverse: true, toggleNavKey: 0}, 
+        React.createElement(CollapsibleNav, {eventKey: 0}, " ", /* This is the eventKey referenced */
+          React.createElement(Nav, {navbar: true, right: true}, 
+            React.createElement(NavItem, {eventKey: 1, href: "https://github.com/ekonstantinidis/npm-check"}, "Fork me on ", React.createElement("i", {className: "fa fa-github"}))
           )
         )
       )
@@ -37361,10 +37366,9 @@ var Package = React.createClass({displayName: "Package",
     return (
       React.createElement(Row, {className: "package"}, 
         React.createElement(Col, {xs: 12, sm: 1, className: "status"}, React.createElement("i", {className: this.upToDate()})), 
-        React.createElement(Col, {xs: 12, sm: 4, className: "name"}, React.createElement("small", null, "name"), " ", this.state.dependency.name), 
+        React.createElement(Col, {xs: 12, sm: 5, className: "name"}, React.createElement("small", null, "name"), " ", this.state.dependency.name), 
         React.createElement(Col, {xs: 6, sm: 3, className: ""}, React.createElement("small", null, "required"), " ", this.state.dependency.version), 
-        React.createElement(Col, {xs: 6, sm: 3, className: ""}, React.createElement("small", null, "latest"), " ", this.state.dependency.current['dist-tags'].latest), 
-        React.createElement(Col, {xs: 6, sm: 1, className: ""}, React.createElement("small", null, "more"), " coming")
+        React.createElement(Col, {xs: 6, sm: 3, className: ""}, React.createElement("small", null, "latest"), " ", this.state.dependency.current['dist-tags'].latest)
       )
     );
   }
@@ -37443,15 +37447,21 @@ var Results = React.createClass({displayName: "Results",
 
 
         React.createElement(Grid, null, 
-          React.createElement("h2", null, "Dependencies ", React.createElement("span", {className: "count"}, "(", this.state.packages.dependencies.length, ")")), 
-          this.state.packages.dependencies.map(function(object, i){
-            return React.createElement(Package, {key: object.name, dependency: object});
-          }), 
+          React.createElement(Row, null, 
+            React.createElement(Col, {md: 6}, 
+              React.createElement("h2", null, "Dependencies ", React.createElement("span", {className: "count"}, "(", this.state.packages.dependencies.length, ")")), 
+              this.state.packages.dependencies.map(function(object, i){
+                return React.createElement(Package, {key: object.name, dependency: object});
+              })
+            ), 
 
-          React.createElement("h2", null, "DevDependencies ", React.createElement("span", {className: "count"}, "(", this.state.packages.devDependencies.length, ")")), 
-          this.state.packages.devDependencies.map(function(object, i){
-            return React.createElement(Package, {key: object.name, dependency: object});
-          })
+            React.createElement(Col, {md: 6}, 
+              React.createElement("h2", null, "DevDependencies ", React.createElement("span", {className: "count"}, "(", this.state.packages.devDependencies.length, ")")), 
+              this.state.packages.devDependencies.map(function(object, i){
+                return React.createElement(Package, {key: object.name, dependency: object});
+              })
+            )
+          )
         )
       )
     );
@@ -37477,7 +37487,6 @@ var Grid = ReactBootstrap.Grid;
 var Row = ReactBootstrap.Row;
 var Col = ReactBootstrap.Col;
 var Button = ReactBootstrap.Button;
-var CollapsibleParagraph = ReactBootstrap.CollapsibleParagraph;
 
 var DependenciesField = React.createClass({displayName: "DependenciesField",
   mixins: [
