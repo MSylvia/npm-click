@@ -37208,7 +37208,7 @@ var NotFound = React.createClass({displayName: "NotFound",
 var routes = (
   React.createElement(Route, {handler: App}, 
     React.createElement(DefaultRoute, {handler: SearchPage}), 
-    React.createElement(Route, {name: "search", path: "/", handler: SearchPage}), 
+    React.createElement(Route, {name: "home", path: "/", handler: SearchPage}), 
     React.createElement(Route, {name: "results", path: "results", handler: ResultsPage}), 
     React.createElement(NotFoundRoute, {handler: NotFound})
   )
@@ -37392,6 +37392,18 @@ var DependenciesStore = require('../stores/dependencies');
 var ProjectStore = require('../stores/project-details');
 
 var Results = React.createClass({displayName: "Results",
+
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+
+  componentWillMount: function () {
+    var projectName = ProjectStore.getProjectDetails().name;
+    if (!projectName) {
+      this.context.router.transitionTo('home');
+    }
+  },
+
   getInitialState: function () {
     return {
       projectDetails: ProjectStore.getProjectDetails(),
