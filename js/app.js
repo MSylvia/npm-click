@@ -37241,15 +37241,15 @@ var About = React.createClass({displayName: "About",
           React.createElement(Row, null, 
             React.createElement(Col, {md: 4}, 
               React.createElement("img", {src: "images/npm-logo.png", className: "img-responsive"}), 
-              React.createElement("p", {className: "lead"}, "npm is the package manager for Node.js. It was created in 2009 as an open source project to help JavaScript developers easily share packaged modules of code.")
+              React.createElement("p", {className: "lead"}, "NPM is awesome! We all use it. Dependencies get updated daily(?) so if you want to be up to date, you are at the right place.")
             ), 
             React.createElement(Col, {md: 4}, 
               React.createElement("img", {src: "images/packagejson.png", className: "img-responsive"}), 
-              React.createElement("p", {className: "lead"}, "npm is the package manager for Node.js. It was created in 2009 as an open source project to help JavaScript developers easily share packaged modules of code.")
+              React.createElement("p", {className: "lead"}, "Got your package.json? Drop it on the search bar, copy & paste its content to the text box or use the upload. Whatever works for you... 'Submit' and that's all!")
             ), 
             React.createElement(Col, {md: 4}, 
               React.createElement("img", {src: "images/results.png", className: "img-responsive"}), 
-              React.createElement("p", {className: "lead"}, "npm is the package manager for Node.js. It was created in 2009 as an open source project to help JavaScript developers easily share packaged modules of code.")
+              React.createElement("p", {className: "lead"}, "Still not convienced? There's a 'demo' button next to the search form. Yeap that red one. Click and see what happens! (I don't mean the loading btw)")
             )
           )
         )
@@ -37309,10 +37309,10 @@ var Navigation = React.createClass({displayName: "Navigation",
   render: function () {
     return (
 
-      React.createElement(ReactBootstrap.Navbar, {brand: "Dependencies Compare", inverse: true, toggleNavKey: 0}, 
+      React.createElement(ReactBootstrap.Navbar, {brand: "Npm Check", inverse: true, toggleNavKey: 0}, 
         React.createElement(ReactBootstrap.CollapsableNav, {eventKey: 0}, " ", /* This is the eventKey referenced */
           React.createElement(ReactBootstrap.Nav, {navbar: true, right: true}, 
-            React.createElement(ReactBootstrap.NavItem, {eventKey: 1, href: "#"}, "Fork me on ", React.createElement("i", {className: "fa fa-github"}))
+            React.createElement(ReactBootstrap.NavItem, {eventKey: 1, href: "https://github.com/ekonstantinidis/npm-check"}, "Fork me on ", React.createElement("i", {className: "fa fa-github"}))
           )
         )
       )
