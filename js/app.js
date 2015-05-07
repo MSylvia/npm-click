@@ -34293,6 +34293,37 @@ exports.throwIf = function(val,msg){
 };
 
 },{"eventemitter3":271,"native-promise-only":272}],290:[function(require,module,exports){
+var React = require('react');
+
+var loadingStyle = {};
+
+module.exports = React.createClass({
+
+  displayName: 'Reloading',
+
+  render: function () {
+    var classname = this.props.className ? this.props.className : '';
+    var content = this.props.text ? this.props.text : 'Loading';
+
+    if (this.props.faIcon) {
+      content = React.createElement("i", {className: this.props.faIcon}, '');
+    }
+
+    if (!this.props.shouldShow) {
+      loadingStyle.display = 'none';
+    } else {
+      loadingStyle.display = 'block';
+    }
+
+    return (
+      React.createElement("div", {className: classname, style: loadingStyle}, content)
+    );
+
+  }
+
+});
+
+},{"react":269}],291:[function(require,module,exports){
 /**
  * Module dependencies.
  */
@@ -35417,7 +35448,7 @@ request.put = function(url, data, fn){
 
 module.exports = request;
 
-},{"emitter":291,"reduce":292}],291:[function(require,module,exports){
+},{"emitter":292,"reduce":293}],292:[function(require,module,exports){
 
 /**
  * Expose `Emitter`.
@@ -35583,7 +35614,7 @@ Emitter.prototype.hasListeners = function(event){
   return !! this.listeners(event).length;
 };
 
-},{}],292:[function(require,module,exports){
+},{}],293:[function(require,module,exports){
 
 /**
  * Reduce `arr` with `fn`.
@@ -35608,7 +35639,7 @@ module.exports = function(arr, fn, initial){
   
   return curr;
 };
-},{}],293:[function(require,module,exports){
+},{}],294:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -37158,7 +37189,7 @@ module.exports = function(arr, fn, initial){
   }
 }.call(this));
 
-},{}],294:[function(require,module,exports){
+},{}],295:[function(require,module,exports){
 var Reflux = require('reflux');
 
 var Actions = Reflux.createActions({
@@ -37172,7 +37203,7 @@ var Actions = Reflux.createActions({
 
 module.exports = Actions;
 
-},{"reflux":270}],295:[function(require,module,exports){
+},{"reflux":270}],296:[function(require,module,exports){
 var React = require('react');
 var Router = require('react-router');
 var Reflux = require('reflux');
@@ -37218,7 +37249,7 @@ Router.run(routes, function (Handler) {
   React.render(React.createElement(Handler, null), document.getElementById('app'));
 });
 
-},{"./components/navigation":298,"./pages/results":302,"./pages/search":303,"react":269,"react-bootstrap":55,"react-router":99,"reflux":270}],296:[function(require,module,exports){
+},{"./components/navigation":298,"./pages/results":302,"./pages/search":303,"react":269,"react-bootstrap":55,"react-router":99,"reflux":270}],297:[function(require,module,exports){
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 
@@ -37261,47 +37292,7 @@ var About = React.createClass({displayName: "About",
 module.exports = About;
 
 
-},{"react":269,"react-bootstrap":55}],297:[function(require,module,exports){
-var React = require('react');
-
-var loadingStyle = {
-    textAlign: 'center',
-    padding: '5px 0'
-};
-
-var Loading = React.createClass({displayName: "Loading",
-
-  getInitialState: function () {
-    return {
-      show: this.props.shouldShow
-    };
-  },
-
-  componentWillReceiveProps: function (newProps) {
-    this.replaceState({
-      show: newProps.shouldShow
-    });
-  },
-
-  render: function () {
-    var loading;
-    if (!this.state.show) {
-      loadingStyle.display = 'none';
-    } else {
-      loadingStyle.display = 'block';
-    }
-    return (
-      React.createElement("div", {style: loadingStyle}, 
-        React.createElement("i", {className: "fa fa-refresh fa-spin"})
-      )
-    );
-  }
-});
-
-module.exports = Loading;
-
-
-},{"react":269}],298:[function(require,module,exports){
+},{"react":269,"react-bootstrap":55}],298:[function(require,module,exports){
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 
@@ -37486,9 +37477,9 @@ var React = require('react');
 var Reflux = require('reflux');
 var ReactBootstrap = require('react-bootstrap');
 var Dropzone = require('react-dropzone');
+var Loading = require('reloading');
 
 var Actions = require('../actions/actions');
-var Loading = require('../components/loading');
 var DependenciesStore = require('../stores/dependencies');
 
 var Alert = ReactBootstrap.Alert;
@@ -37679,7 +37670,7 @@ var DependenciesField = React.createClass({displayName: "DependenciesField",
               ), 
 
               errors, 
-              React.createElement(Loading, {shouldShow: this.state.loading}), 
+              React.createElement(Loading, {shouldShow: this.state.loading, faIcon: "fa fa-refresh fa-spin", className: "loading"}), 
 
               React.createElement(Row, null, 
                 React.createElement(Col, {md: 6}, React.createElement(Button, {bsStyle: "success", bsSize: "large", block: true, onClick: this.submitJson}, "Submit")), 
@@ -37698,7 +37689,7 @@ var DependenciesField = React.createClass({displayName: "DependenciesField",
 module.exports = DependenciesField;
 
 
-},{"../actions/actions":294,"../components/loading":297,"../stores/dependencies":304,"react":269,"react-bootstrap":55,"react-dropzone":74,"reflux":270}],302:[function(require,module,exports){
+},{"../actions/actions":295,"../stores/dependencies":304,"react":269,"react-bootstrap":55,"react-dropzone":74,"reflux":270,"reloading":290}],302:[function(require,module,exports){
 var React = require('react');
 
 var Results = require('../components/results');
@@ -37737,7 +37728,7 @@ var SearchPage = React.createClass({displayName: "SearchPage",
 module.exports = SearchPage;
 
 
-},{"../components/about":296,"../components/search":301,"react":269}],304:[function(require,module,exports){
+},{"../components/about":297,"../components/search":301,"react":269}],304:[function(require,module,exports){
 var Actions = require('../actions/actions');
 var Reflux = require('reflux');
 var u = require('underscore');
@@ -37946,7 +37937,7 @@ var DependenciesStore = Reflux.createStore({
 module.exports = DependenciesStore;
 
 
-},{"../actions/actions":294,"../utils/api-requests":306,"reflux":270,"underscore":293}],305:[function(require,module,exports){
+},{"../actions/actions":295,"../utils/api-requests":306,"reflux":270,"underscore":294}],305:[function(require,module,exports){
 var Actions = require('../actions/actions');
 var Reflux = require('reflux');
 
@@ -37975,7 +37966,7 @@ var Store = Reflux.createStore({
 module.exports = Store;
 
 
-},{"../actions/actions":294,"reflux":270}],306:[function(require,module,exports){
+},{"../actions/actions":295,"reflux":270}],306:[function(require,module,exports){
 var request = require('superagent');
 
 var apiRequests = {
@@ -38005,4 +37996,4 @@ var apiRequests = {
 
 module.exports = apiRequests;
 
-},{"superagent":290}]},{},[295]);
+},{"superagent":291}]},{},[296]);
