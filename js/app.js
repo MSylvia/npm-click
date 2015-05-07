@@ -37234,7 +37234,7 @@ var About = React.createClass({displayName: "About",
         React.createElement(Grid, null, 
           React.createElement(Row, null, 
             React.createElement(Col, {md: 12}, 
-              React.createElement("h1", null, "Comparing NPM (dev)Dependencies"), 
+              React.createElement("h1", null, "Comparing NPM (dev) Dependencies"), 
               React.createElement("h2", null, "All you need is your package.json. That's all!")
             )
           ), 
@@ -37314,12 +37314,10 @@ var Navigation = React.createClass({displayName: "Navigation",
   render: function () {
     return (
 
-      React.createElement(Navbar, {brand: "Npm Check", inverse: true, toggleNavKey: 0}, 
-        React.createElement(CollapsibleNav, {eventKey: 0}, " ", /* This is the eventKey referenced */
-          React.createElement(Nav, {navbar: true, right: true}, 
-            React.createElement(NavItem, {eventKey: 1, href: "https://github.com/ekonstantinidis/npm-check"}, "Fork me on ", React.createElement("i", {className: "fa fa-github"}))
+      React.createElement(Navbar, {brand: React.createElement("a", {href: "http://www.iamemmanouil.com/npm-check"}, "Npm Check"), inverse: true}, 
+          React.createElement(Nav, {right: true}, 
+            React.createElement(NavItem, {href: "https://github.com/ekonstantinidis/npm-check"}, "Fork me on ", React.createElement("i", {className: "fa fa-github"}))
           )
-        )
       )
 
     );
@@ -37665,7 +37663,7 @@ var DependenciesField = React.createClass({displayName: "DependenciesField",
           React.createElement(Row, {className: "search-bar"}, 
             React.createElement(Col, {mdOffset: 3, md: 6}, 
 
-              React.createElement(Dropzone, {onDrop: this.onDrop, className: "dropzone hidden-xs"}, 
+              React.createElement(Dropzone, {onDrop: this.onDrop, className: "dropzone"}, 
                 React.createElement(Input, {
                   type: "textarea", 
                   className: "input-lg", 
