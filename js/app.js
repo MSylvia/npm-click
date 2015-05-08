@@ -34295,28 +34295,21 @@ exports.throwIf = function(val,msg){
 },{"eventemitter3":271,"native-promise-only":272}],290:[function(require,module,exports){
 var React = require('react');
 
-var loadingStyle = {};
-
 module.exports = React.createClass({
 
   displayName: 'Reloading',
 
   render: function () {
-    var classname = this.props.className ? this.props.className : '';
-    var content = this.props.text ? this.props.text : 'Loading';
-
-    if (this.props.faIcon) {
-      content = React.createElement("i", {className: this.props.faIcon}, '');
-    }
-
-    if (!this.props.shouldShow) {
-      loadingStyle.display = 'none';
-    } else {
-      loadingStyle.display = 'block';
-    }
+    var content = this.props.text ? this.props.text : 'Loading...';
+    content = this.props.faIcon ? React.createElement("i", {className: this.props.faIcon}, '') : content;
 
     return (
-      React.createElement("div", {className: classname, style: loadingStyle}, content)
+      React.createElement("div", {
+        className: this.props.className,
+        style: {
+          display: this.props.shouldShow ? 'block' : 'none'
+        }
+      }, this.props.children ? this.props.children : content)
     );
 
   }
@@ -37356,7 +37349,7 @@ var Package = React.createClass({displayName: "Package",
       React.createElement(Row, {className: "package"}, 
         React.createElement(Col, {xs: 12, sm: 1, className: "status"}, React.createElement("i", {className: this.upToDate()})), 
         React.createElement(Col, {xs: 12, sm: 5, className: "name"}, React.createElement("small", null, "name"), " ", this.state.dependency.name), 
-        React.createElement(Col, {xs: 6, sm: 3, className: ""}, React.createElement("small", null, "required"), " ", this.state.dependency.version), 
+        React.createElement(Col, {xs: 6, sm: 3, className: "required"}, React.createElement("small", null, "required"), React.createElement("span", null, this.state.dependency.version)), 
         React.createElement(Col, {xs: 6, sm: 3, className: ""}, React.createElement("small", null, "latest"), " ", this.state.dependency.current['dist-tags'].latest)
       )
     );
@@ -37670,7 +37663,7 @@ var DependenciesField = React.createClass({displayName: "DependenciesField",
               ), 
 
               errors, 
-              React.createElement(Loading, {shouldShow: this.state.loading, faIcon: "fa fa-refresh fa-spin", className: "loading"}), 
+              React.createElement(Loading, {shouldShow: this.state.loading, className: "loading"}, React.createElement("i", {className: "fa fa-refresh fa-spin"}), " Getting your (dev) dependencies"), 
 
               React.createElement(Row, null, 
                 React.createElement(Col, {md: 6}, React.createElement(Button, {bsStyle: "success", bsSize: "large", block: true, onClick: this.submitJson}, "Submit")), 

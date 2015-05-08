@@ -8393,6 +8393,9 @@ small {
   text-align: center;
   padding: 5px 0;
 }
+.loading .fa {
+  margin: 0 5px;
+}
 /* @end Misc */
 /* @group Navbar */
 .navbar {
@@ -8574,5 +8577,12 @@ small {
 }
 .package .status .has-errored {
   color: #787878;
+}
+.package .required span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  width: 100%;
 }
 /* @end Package */
