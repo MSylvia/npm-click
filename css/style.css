@@ -8437,6 +8437,15 @@ small {
     padding-bottom: 10px;
   }
 }
+@media (max-width: 991px) {
+  .navbar .navbar-brand {
+    width: 100%;
+    text-align: center;
+  }
+  .navbar .navbar-nav > li > a {
+    text-align: center;
+  }
+}
 /* @end Navbar */
 /* @group Search Bar */
 .search-bar {
