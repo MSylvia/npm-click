@@ -10191,9 +10191,6 @@ var Dropzone = React.createClass({displayName: "Dropzone",
       borderStyle: this.state.isDragActive ? "solid" : "dashed"
     };
 
-    if (this.props.className) {
-      style = this.props.style;
-    }
 
     return (
         React.createElement("div", {className: className, style: style, onClick: this.onClick, onDragLeave: this.onDragLeave, onDragOver: this.onDragOver, onDrop: this.onDrop},
@@ -37359,12 +37356,6 @@ var Col = ReactBootstrap.Col;
 var Input = ReactBootstrap.Input;
 
 var Package = React.createClass({displayName: "Package",
-  getInitialState: function () {
-    return {
-      dependency: this.props.dependency
-    };
-  },
-
   componentWillReceiveProps: function (newProps) {
     this.setState({
       dependency: newProps.dependency
@@ -37372,7 +37363,7 @@ var Package = React.createClass({displayName: "Package",
   },
 
   upToDate: function () {
-    var isUpToDate = this.state.dependency.status;
+    var isUpToDate = this.props.dependency.status;
     if (isUpToDate === 1) {
       return 'has-latest fa fa-check-circle';
     } else if (isUpToDate === 0) {
@@ -37385,18 +37376,26 @@ var Package = React.createClass({displayName: "Package",
   },
 
   render: function () {
+    var readme;
+    if (this.props.dependency.current.homepage) {
+      readme = (
+          React.createElement("a", {href: this.props.dependency.current.homepage, target: "_blank"}, React.createElement("i", {className: "fa fa-file-text-o"}))
+      );
+    }
+
     return (
       React.createElement(Row, {className: "package"}, 
         React.createElement(Col, {xs: 12, sm: 1, className: "status"}, React.createElement("i", {className: this.upToDate()})), 
-        React.createElement(Col, {xs: 12, sm: 5, className: "name"}, React.createElement("small", null, "name"), " ", this.state.dependency.name), 
-        React.createElement(Col, {xs: 6, sm: 3, className: "required"}, React.createElement("small", null, "required"), React.createElement("span", null, this.state.dependency.version)), 
-        React.createElement(Col, {xs: 6, sm: 3, className: ""}, React.createElement("small", null, "latest"), " ", this.state.dependency.current['dist-tags'].latest)
+        React.createElement(Col, {xs: 12, sm: 5, className: "name"}, React.createElement("small", null, "name"), " ", this.props.dependency.name, " ", readme), 
+        React.createElement(Col, {xs: 6, sm: 3, className: "required"}, React.createElement("small", null, "required"), React.createElement("span", null, this.props.dependency.version)), 
+        React.createElement(Col, {xs: 6, sm: 3, className: ""}, React.createElement("small", null, "latest"), " ", this.props.dependency.current['dist-tags'].latest)
       )
     );
   }
 });
 
 module.exports = Package;
+
 
 },{"react":269,"react-bootstrap":55}],300:[function(require,module,exports){
 var React = require('react');
